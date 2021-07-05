@@ -40,13 +40,33 @@ const getUsername = () => _kc.tokenParsed?.preferred_username;
 
 const hasRole = (roles) => roles.some((role) => _kc.hasRealmRole(role));
 
-/*
 const  tokenExpired =_kc.onTokenExpired = () => {
-  console.log('token expired', _kc.token);
-  _kc.updateToken(30).then(() => {
-    console.log('successfully get a new token', _kc.token);
-  }).catch(doLogin);
-}*/
+  console.log('token expired!: previous token', _kc.token);
+
+  if(window.confirm('Do you want to keep login')){
+
+    try {
+
+      _kc.updateToken(5).success((response) => {
+        console.log('response');
+        if (response.ok) {
+          console.log('successfully get a new token', _kc.token);
+        } else {
+          throw new Error('Something went wrong ...');
+        }
+      }).error( err => {
+          console.log('updateToken',err);
+          doLogout();
+      });
+    }catch (e) {
+      console.log('err',e);
+    }
+
+  }else {
+    doLogout();
+  }
+
+}
 
 const UserService = {
   initKeycloak,
