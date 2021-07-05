@@ -9,8 +9,8 @@ const _kc = new Keycloak('/keycloak.json');
  */
 const initKeycloak = (onAuthenticatedCallback) => {
   _kc.init({
+    //onLoad: 'login-required',
     onLoad: 'check-sso',
-   // onLoad: 'login-required',
     silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
     pkceMethod: 'S256',
   })
@@ -40,13 +40,13 @@ const getUsername = () => _kc.tokenParsed?.preferred_username;
 
 const hasRole = (roles) => roles.some((role) => _kc.hasRealmRole(role));
 
-
+/*
 const  tokenExpired =_kc.onTokenExpired = () => {
   console.log('token expired', _kc.token);
   _kc.updateToken(30).then(() => {
     console.log('successfully get a new token', _kc.token);
   }).catch(doLogin);
-}
+}*/
 
 const UserService = {
   initKeycloak,
@@ -57,7 +57,7 @@ const UserService = {
   updateToken,
   getUsername,
   hasRole,
-  tokenExpired
+  //tokenExpired
 };
 
 export default UserService;
