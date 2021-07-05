@@ -47,14 +47,14 @@ const  tokenExpired =_kc.onTokenExpired = () => {
 
     try {
 
-      _kc.updateToken(5).success((response) => {
+      _kc.updateToken(5).then((response) => {
         console.log('response');
         if (response.ok) {
           console.log('successfully get a new token', _kc.token);
         } else {
           throw new Error('Something went wrong ...');
         }
-      }).error( err => {
+      }).catch( err => {
           console.log('updateToken',err);
           doLogout();
       });
