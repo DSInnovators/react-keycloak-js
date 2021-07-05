@@ -5,8 +5,9 @@ import RenderOnAnonymous from "./component/RenderOnAnonymous";
 import RenderOnAuthenticated from "./component/RenderOnAuthenticated";
 import Welcome from "./component/Welcome";
 import BookBox from "./component/BookBox";
+import UserService from "./services/UserService";
 
-ReactDOM.render(
+const renderApp = () => ReactDOM.render(
   <React.StrictMode>
       {/*
     <App />*/}
@@ -22,3 +23,4 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+UserService.initKeycloak(renderApp);
