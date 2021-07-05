@@ -48,22 +48,23 @@ const  tokenExpired =_kc.onTokenExpired = () => {
     try {
 
       _kc.updateToken(5).then((response) => {
-        console.log('response');
-        if (response.ok) {
+        console.log('response',response);
+        if (response) {
           console.log('successfully get a new token', _kc.token);
         } else {
           throw new Error('Something went wrong ...');
         }
       }).catch( err => {
-          console.log('updateToken',err);
-          doLogout();
+          console.log('400 response form server',err);
+         // doLogout();
       });
     }catch (e) {
-      console.log('err',e);
+      console.log('err in try catch',e);
+      //doLogout();
     }
-
   }else {
-    doLogout();
+    console.log('User log out selected');
+    //doLogout();
   }
 
 }
