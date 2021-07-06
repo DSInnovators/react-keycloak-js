@@ -5,4 +5,5 @@ keycloak:
   credentials:
     secret: 036aa128-c882-4c8e-b210-69130f76e201
 
-keycloak-user-info-uri: http://localhost:8000/auth/realms/${keycloak.realm}/protocol/openid-connect/userinfo
+keycloak-user-info-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/userinfo
+
