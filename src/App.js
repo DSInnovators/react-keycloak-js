@@ -1,12 +1,23 @@
-
+import { BrowserRouter } from "react-router-dom";
+import RenderOnAnonymous from "./component/RenderOnAnonymous";
+import Welcome from "./component/Welcome";
+import RenderOnAuthenticated from "./component/RenderOnAuthenticated";
+import BookBox from "./component/BookBox";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        AApp
-      </header>
-    </div>
+   <>
+       <BrowserRouter>
+           <div className="container">
+               <RenderOnAnonymous>
+                   <Welcome/>
+               </RenderOnAnonymous>
+               <RenderOnAuthenticated>
+                   <BookBox/>
+               </RenderOnAuthenticated>
+           </div>
+       </BrowserRouter>
+   </>
   );
 }
 

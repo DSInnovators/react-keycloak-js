@@ -9,17 +9,7 @@ import UserService from "./services/UserService";
 
 const renderApp = () => ReactDOM.render(
   <React.StrictMode>
-      {/*
-    <App />*/}
-      <div className="container">
-          <RenderOnAnonymous>
-              <Welcome/>
-          </RenderOnAnonymous>
-          <RenderOnAuthenticated>
-              <BookBox/>
-          </RenderOnAuthenticated>
-      </div>
-
+      <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
