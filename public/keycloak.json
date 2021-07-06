@@ -1,7 +1,0 @@
-{
-  "realm": "BANBEIS",
-  "auth-server-url": "http://localhost:8000/auth",
-  "ssl-required": "external",
-  "resource": "next-client",
-  "public-client": true
-}
