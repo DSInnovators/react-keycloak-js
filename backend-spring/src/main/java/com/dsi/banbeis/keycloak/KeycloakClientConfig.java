@@ -1,4 +1,4 @@
-package com.dsi.banbeis.config.keycloak;
+package com.dsi.banbeis.keycloak;
 
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;

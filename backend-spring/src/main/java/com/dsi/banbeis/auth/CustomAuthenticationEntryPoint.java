@@ -1,4 +1,4 @@
-package com.dsi.banbeis.config.auth;
+package com.dsi.banbeis.auth;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

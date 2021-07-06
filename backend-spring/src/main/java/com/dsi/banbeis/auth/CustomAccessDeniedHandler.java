@@ -1,4 +1,4 @@
-package com.dsi.banbeis.config.auth;
+package com.dsi.banbeis.auth;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;

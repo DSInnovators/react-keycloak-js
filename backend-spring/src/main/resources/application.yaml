@@ -7,3 +7,9 @@ keycloak:
 
 keycloak-user-info-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/userinfo
 
+
+spring:
+  autoconfigure:
+   exclude[0]: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
+
