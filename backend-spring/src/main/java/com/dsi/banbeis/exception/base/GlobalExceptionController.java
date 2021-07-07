@@ -22,7 +22,7 @@ public class GlobalExceptionController {
 
         ErrorResponse errorResponse = new ErrorResponse(httpStatus,message);
         String jsonResponse = new Gson().toJson(errorResponse);
-        return ResponseEntity.status(httpStatus).contentType(MediaType.APPLICATION_JSON).body(jsonResponse);
+        return ResponseEntity.status(httpStatus).contentType(MediaType.parseMediaType("application/json;charset=UTF-8")).body(jsonResponse);
 
     }
 }

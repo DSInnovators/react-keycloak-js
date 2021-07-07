@@ -1,4 +1,4 @@
-package com.dsi.banbeis.auth;
+package com.dsi.banbeis.config.auth;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -32,6 +32,17 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
         new Gson().toJson(body, new TypeReference<Map<String, Object>>() {
         }.getType(), response.getWriter());
+
+       /* HttpStatus httpStatus = HttpStatus.FORBIDDEN;
+        String message = "You are not authorize to view the content!";
+
+        ErrorResponse errorResponse = new ErrorResponse(httpStatus,message);
+        String body = new Gson().toJson(errorResponse);
+
+      //  String jsonResponse = new Gson().toJson(errorResponse);
+       // return ResponseEntity.status(httpStatus).contentType(MediaType.parseMediaType("application/json;charset=UTF-8")).body(jsonResponse);
+        response.getWriter().write(body);*/
+
     }
 
 }

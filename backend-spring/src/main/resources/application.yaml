@@ -1,15 +1,19 @@
 keycloak:
   realm: BANBEIS
-  resource: spring-client
+  resource: next-client
   auth-server-url: http://localhost:8000/auth
-  credentials:
-    secret: 036aa128-c882-4c8e-b210-69130f76e201
+  #credentials:
+  #  secret: 036aa128-c882-4c8e-b210-69130f76e201
+  public-client: true
+  use-resource-role-mappings: true
+  principal-attribute: sub
+  cors: true
 
 keycloak-user-info-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/userinfo
 
 
-spring:
-  autoconfigure:
-   exclude[0]: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
-
+#spring:
+#  autoconfigure:
+#   exclude[0]: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+#
 
