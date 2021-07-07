@@ -10,24 +10,28 @@ const HttpMethods = {
 
 const _axios = axios.create();
 
-const configure = () => {
-  _axios.interceptors.request.use((config) => {
-    console.log('using interceptor');
-    if (UserService.isLoggedIn()) {
-      const cb = () => {
-        config.headers.Authorization = `Bearer ${UserService.getToken()}`;
-        return Promise.resolve(config);
+_axios.interceptors.request.use((config) => {
+  console.log('using interceptor');
+  if (UserService.isLoggedIn()) {
+    const cb = () => {
+      /*config.headers.Authorization = `Bearer ${UserService.getToken()}`;
+      config.headers.ContentType = 'application/json';*/
+      config.headers = {
+        'Authorization': `Bearer ${UserService.getToken()}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       };
-      return UserService.updateToken(cb);
-    }
-  });
-};
+      return Promise.resolve(config);
+    };
+    return UserService.updateToken(cb);
+  }
+});
 
 const getAxiosClient = () => _axios;
 
 const HttpService = {
   HttpMethods,
-  configure,
+  //configure,
   getAxiosClient,
 };
 

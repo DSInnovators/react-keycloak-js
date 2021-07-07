@@ -10,9 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
-
-@RequestMapping(value = "/student")
 @RestController
+@RequestMapping(value = "/student")
 public class StudentController {
 
     @GetMapping(path = "/all")
