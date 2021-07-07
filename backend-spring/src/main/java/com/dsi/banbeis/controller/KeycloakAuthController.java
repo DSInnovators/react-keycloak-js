@@ -1,5 +1,10 @@
 package com.dsi.banbeis.controller;
 
+import org.keycloak.admin.client.Keycloak;
+import org.keycloak.admin.client.resource.RealmResource;
+import org.keycloak.admin.client.resource.UsersResource;
+import org.keycloak.representations.idm.RealmRepresentation;
+import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -12,9 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
-@RequestMapping("/keycloak")
+@RequestMapping(path = "/keycloak",produces = MediaType.APPLICATION_JSON_VALUE)
 public class KeycloakAuthController {
 
     @Autowired
@@ -22,6 +28,11 @@ public class KeycloakAuthController {
 
     @Value("${keycloak-user-info-uri}")
     private String keycloakUserInfo;
+
+    @Autowired
+    private Keycloak keycloak;
+
+
 
    /* @Autowired
     private KeycloakRestService  keycloakRestService;
@@ -33,7 +44,30 @@ public class KeycloakAuthController {
     }
 
     */
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/create")
+    public String createUser(){
+
+        List<RealmRepresentation> relams = keycloak.realms().findAll();
+
+        RealmResource realmResource = keycloak.realm("BANBEIS");
+
+        UserRepresentation user =
+                createUser("akash","akash073@gmail.com");
+
+        UsersResource users = realmResource.users();
+        users.create(user);
+
+        return "OK";
+    }
+
+    private UserRepresentation createUser(String userName,String email){
+        UserRepresentation userRepresentation = new UserRepresentation();
+        userRepresentation.setUsername(userName);
+        userRepresentation.setEmail(email);
+        return userRepresentation;
+    }
+
+    @GetMapping
     public String getUserInfo(HttpServletRequest httpServletRequest) {
 
         String token = httpServletRequest.getHeader("Authorization");

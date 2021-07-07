@@ -2,9 +2,45 @@ import UserService from "../services/UserService";
 import Menu from "./Menu";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import axios from "axios";
+import HttpService from "../services/HttpService";
 
-const Welcome = () => (
-  <div className="jumbotron">
+const LIST_STUDENTS = 'http://localhost:8080/student/all';
+
+const Welcome = () => {
+    const getStudentData = async ()=>{
+        console.log('Cookie created name : user ');
+
+
+        HttpService.getAxiosClient().get(LIST_STUDENTS)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(error => {
+                    alert('You are not authorize to view the content')
+                    console.log("Error occured " + error)
+                }
+            )
+
+       /* const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' +  session.accessToken
+            }
+        }
+
+        await axios.get(BASE_URL_STUDENT,config)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(error => {
+                    alert('You are not authorize to view the content')
+                    console.log("Error occured " + error)
+                }
+            )*/
+    }
+
+  return <div className="jumbotron">
 
       <Menu/>
 
@@ -12,6 +48,13 @@ const Welcome = () => (
           <Route exact path="/">
               {/*<BookList/>*/}
               List of books
+              <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={getStudentData}>
+                  GetStudentData
+              </button>
+
           </Route>
           <Route exact path="/books/new">
               {/*<BookForm/>*/}
@@ -46,6 +89,8 @@ const Welcome = () => (
       </div>*/}
 
   </div>
-)
+
+
+}
 
 export default Welcome

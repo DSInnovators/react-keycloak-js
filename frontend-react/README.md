@@ -5,6 +5,8 @@ npm i keycloak-js@13.0.0
 
 npm i react-router-dom
 
+npm i axios
+
 ### Commands 
 1. Go to keycloak folder
 2. To start run
