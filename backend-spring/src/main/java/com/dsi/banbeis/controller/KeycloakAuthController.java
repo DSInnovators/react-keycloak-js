@@ -1,5 +1,12 @@
 package com.dsi.banbeis.controller;
 
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.keycloak.admin.client.Keycloak;
+import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.admin.client.resource.ClientResource;
+import org.keycloak.admin.client.resource.RealmResource;
+import org.keycloak.admin.client.resource.UserResource;
+import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/keycloak",produces = MediaType.APPLICATION_JSON_VALUE)
@@ -24,8 +32,8 @@ public class KeycloakAuthController {
     @Value("${keycloak-user-info-uri}")
     private String keycloakUserInfo;
 
-   /* @Autowired
-    private Keycloak keycloak;*/
+    @Autowired
+    private Keycloak keycloak;
 
 
 
@@ -39,18 +47,53 @@ public class KeycloakAuthController {
     }
 
     */
+
+    private static final String SERVER_URL = "http://localhost:8000/auth";
+    private static final String REALM = "BANBEIS";
+    private static final String USERNAME = "admin";
+    private static final String PASSWORD = "admin";
+    private static final String CLIENT_ID = "admin-cli";
+
+
     @GetMapping("/create")
     public String createUser(){
 
-       /* List<RealmRepresentation> relams = keycloak.realms().findAll();
-
-        RealmResource realmResource = keycloak.realm("BANBEIS");
+       /*
 
         UserRepresentation user =
                 createUser("akash","akash073@gmail.com");
 
         UsersResource users = realmResource.users();
         users.create(user);*/
+
+       /*
+       List clientRepresentations=keycloak.realm("MY_REALM").clients().findByClientId("my_app"); ClientRepresentation representation=clientRepresentations.get(0);
+ClientResource resource=keycloak.realm("MY_REALM").clients().get(representation.getId());
+       */
+        RealmResource realmResource = keycloak.realm("BANBEIS");
+
+/*        org.keycloak.representations.idm.ClientRepresentation clientRepresentation
+        =realmResource.clients().get("27f7c2e3-f2e7-4361-956b-ae6761d64fcf");*/
+
+
+
+        Keycloak keycloak = KeycloakBuilder
+                .builder()
+                .serverUrl(SERVER_URL)
+                .realm(REALM)
+                .username(USERNAME)
+                .password(PASSWORD)
+                .clientId(CLIENT_ID)
+                .resteasyClient(new ResteasyClientBuilder().connectionPoolSize(10).build())
+                .build();
+
+        UsersResource usersResource = keycloak.realm(REALM).users();
+        UserResource userResource = usersResource.get("27f7c2e3-f2e7-4361-956b-ae6761d64fcf");
+        System.out.println(userResource.toRepresentation().getEmail());
+
+        ClientResource resource= realmResource.clients().get("27f7c2e3-f2e7-4361-956b-ae6761d64fcf");
+
+        List sessions=resource.getUserSessions(0,1000);
 
         return "OK";
     }

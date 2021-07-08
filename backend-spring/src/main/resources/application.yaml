@@ -1,10 +1,10 @@
 keycloak:
   realm: BANBEIS
-  resource: next-client
+  resource: admin-cli
   auth-server-url: http://localhost:8000/auth
-  #credentials:
-  #  secret: 036aa128-c882-4c8e-b210-69130f76e201
-  public-client: true
+  credentials:
+    secret: a93184f7-6b56-40da-b7cc-478376f99fa2
+  public-client: false
   use-resource-role-mappings: true
   principal-attribute: sub
   cors: true
