@@ -10,8 +10,20 @@ const Menu = () => (
       <div id="navbar">
         <ul className="nav navbar-nav">
           <li><Link to="/">List</Link></li>
-          <li><Link to="/books/new">New Book</Link></li>
-          <li><Link to="/secret">Secret Books</Link></li>
+          {/*<li><Link to="/books/new">New Book</Link></li>
+          <li><Link to="/secret">Secret Books</Link></li>*/}
+          {
+            UserService.hasClientRole('admin') && <li><Link to="/admin">Admin</Link></li>
+          }
+
+
+          {UserService.hasClientRole('student') &&
+            <li>
+
+              <Link to="/student">Student</Link>
+
+            </li>
+          }
           <li><Link to="/foo">No Match</Link></li>
         </ul>
         <button className="btn btn-success navbar-btn navbar-right" style={{ marginRight: 0, marginTop: 14}} onClick={() => UserService.doLogout()}>

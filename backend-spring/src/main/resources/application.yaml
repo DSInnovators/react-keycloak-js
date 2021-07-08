@@ -9,11 +9,21 @@ keycloak:
   principal-attribute: sub
   cors: true
 
+
+# ROLE BASED AUTH
+
+#keycloak.security-constraints[0].authRoles[0]=relam_role
+#keycloak.security-constraints[0].authRoles[1]=student
+#keycloak.security-constraints[0].securityCollections[0].patterns[0]=/students/*
+#
+#keycloak.security-constraints[1].authRoles[0]=teacher
+#keycloak.security-constraints[1].securityCollections[0].patterns[0]=/teacher/*
+
+
+
+
 keycloak-user-info-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/userinfo
-
-
 #spring:
 #  autoconfigure:
 #   exclude[0]: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 #
-

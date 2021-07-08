@@ -75,6 +75,11 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
         return new NullAuthenticatedSessionStrategy();
     }
 
+    @Bean
+    public CustomAccessDeniedHandler getCustomAccessDeniedHandler(){
+        return new CustomAccessDeniedHandler();
+    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -86,7 +91,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
                 .csrf().disable() //
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //
                 .and() //
-                .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())
+                .exceptionHandling().accessDeniedHandler(getCustomAccessDeniedHandler())
                         .and()
                 .authorizeRequests().antMatchers( "/favicon.ico").permitAll();
 
@@ -94,6 +99,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
                 .antMatchers("/teachers/**")
                 .hasAnyRole("MANAGER","ACTOR");*/
         expressionInterceptUrlRegistry = expressionInterceptUrlRegistry.antMatchers("/student/*").hasRole("STUDENT");
+        expressionInterceptUrlRegistry = expressionInterceptUrlRegistry.antMatchers("/admin/*").hasRole("ADMIN");
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })

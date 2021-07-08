@@ -11,7 +11,7 @@ const HttpMethods = {
 const _axios = axios.create();
 
 _axios.interceptors.request.use((config) => {
-  console.log('using interceptor');
+  console.log('using interceptor: login',UserService.isLoggedIn());
   if (UserService.isLoggedIn()) {
     const cb = () => {
       /*config.headers.Authorization = `Bearer ${UserService.getToken()}`;

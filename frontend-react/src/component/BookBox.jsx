@@ -6,6 +6,7 @@ import axios from "axios";
 import HttpService from "../services/HttpService";
 
 const LIST_STUDENTS = 'http://localhost:8080/student/all';
+const LIST_ADMINS = 'http://localhost:8080/admin/all';
 
 const Welcome = () => {
     const getStudentData = async ()=>{
@@ -40,6 +41,38 @@ const Welcome = () => {
             )*/
     }
 
+    const getAdminData = async ()=>{
+        console.log('Cookie created name : user ');
+
+
+        HttpService.getAxiosClient().get(LIST_ADMINS)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(error => {
+                    alert('You are not authorize to view the content')
+                    console.log("Error occured " + error)
+                }
+            )
+
+        /* const config = {
+             headers: {
+                 'Content-Type': 'application/json',
+                 'Authorization': 'Bearer ' +  session.accessToken
+             }
+         }
+
+         await axios.get(BASE_URL_STUDENT,config)
+             .then(res => {
+                 console.log(res);
+             })
+             .catch(error => {
+                     alert('You are not authorize to view the content')
+                     console.log("Error occured " + error)
+                 }
+             )*/
+    }
+
   return <div className="jumbotron">
 
       <Menu/>
@@ -53,6 +86,13 @@ const Welcome = () => {
                   className="btn btn-primary"
                   onClick={getStudentData}>
                   GetStudentData
+              </button>
+
+              <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={getAdminData}>
+                  getAdminData
               </button>
 
           </Route>

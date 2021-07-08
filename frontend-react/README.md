@@ -19,9 +19,14 @@ sudo docker run -dp 8000:8080 my-keycloak
 
 sudo docker stop $(sudo docker ps -q --filter ancestor='my-keycloak' )
 
+4. stop docker service (start/stop/restart)
+
+sudo systemctl stop  snap.docker.dockerd.service
+
 ### Questions
 1. Refresh token flow?
 
 User will not know. After token expiration 
 new request to access token by axios interceptor 
 and api call will be placed.
+
