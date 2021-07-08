@@ -1,4 +1,4 @@
-package com.dsi.banbeis.config.auth;
+package com.dsi.banbeis.config.keycloak;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;

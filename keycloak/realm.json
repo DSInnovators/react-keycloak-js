@@ -10,6 +10,7 @@
   ],
   "users": [
     {
+      "id": "af3cea9b-ca97-4cdc-8eed-da2f67dda387",
       "username": "student",
       "enabled": true,
       "email": "student@smg.com",
@@ -30,6 +31,7 @@
       }
     },
     {
+      "id": "b3e6397c-6630-468f-951a-eca0cb9508af",
       "username": "teacher",
       "enabled": true,
       "email": "teacher@smg.com",
@@ -50,6 +52,7 @@
       }
     },
     {
+      "id": "ca00e62a-b6d5-454d-8b68-ee1e853c521e",
       "username": "admin",
       "enabled": true,
       "email": "admin@smg.com",

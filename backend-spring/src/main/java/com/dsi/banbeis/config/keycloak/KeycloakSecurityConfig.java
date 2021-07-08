@@ -1,7 +1,7 @@
 package com.dsi.banbeis.config.keycloak;
 
 
-import com.dsi.banbeis.config.auth.CustomAccessDeniedHandler;
+
 import org.keycloak.adapters.KeycloakConfigResolver;
 import org.keycloak.adapters.springboot.KeycloakSpringBootProperties;
 import org.keycloak.adapters.springsecurity.KeycloakSecurityComponents;
@@ -31,6 +31,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
@@ -76,7 +77,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     }
 
     @Bean
-    public CustomAccessDeniedHandler getCustomAccessDeniedHandler(){
+    public AccessDeniedHandler getCustomAccessDeniedHandler(){
         return new CustomAccessDeniedHandler();
     }
 
