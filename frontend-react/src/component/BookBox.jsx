@@ -4,6 +4,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import axios from "axios";
 import HttpService from "../services/HttpService";
+import Akash from "./akash";
 
 const LIST_STUDENTS = 'http://localhost:8080/student/all';
 const LIST_ADMINS = 'http://localhost:8080/admin/all';
@@ -100,6 +101,14 @@ const Welcome = () => {
               {/*<BookForm/>*/}
               New book path
           </Route>
+
+
+          <Route exact path="/akash">
+              {/*<BookForm/>*/}
+             <Akash/>
+          </Route>
+
+
           {/*<Route path="/books/:bookId">
               <BookDetails/>
           </Route>
