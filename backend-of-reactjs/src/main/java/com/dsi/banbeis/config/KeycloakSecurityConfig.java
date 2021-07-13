@@ -1,8 +1,9 @@
-package com.dsi.banbeis.config.keycloak;
+package com.dsi.banbeis.config;
 
 
 
 import org.keycloak.adapters.KeycloakConfigResolver;
+import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.keycloak.adapters.springboot.KeycloakSpringBootProperties;
 import org.keycloak.adapters.springsecurity.KeycloakSecurityComponents;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
@@ -36,6 +37,7 @@ import org.springframework.security.web.authentication.session.NullAuthenticated
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
+/*
 @EnableWebSecurity
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true,
@@ -52,16 +54,18 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
     }
 
-   /* @Bean
+   */
+/* @Bean
     public AuthenticationEntryPoint authenticationEntryPoint(){
         return new CustomAuthenticationEntryPoint();
-    }*/
+    }
 
     @Bean
     @Primary
     public KeycloakConfigResolver keycloakConfigResolver(KeycloakSpringBootProperties properties) {
         return new CustomKeycloakSpringBootConfigResolver(properties);
-    }
+    }*//*
+
 
 
     @Autowired
@@ -76,19 +80,23 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
         return new NullAuthenticatedSessionStrategy();
     }
 
-    @Bean
+   */
+/* @Bean
     public AccessDeniedHandler getCustomAccessDeniedHandler(){
         return new CustomAccessDeniedHandler();
-    }
+    }*//*
+
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
 
-         /* expressionInterceptUrlRegistry = expressionInterceptUrlRegistry
+         */
+/* expressionInterceptUrlRegistry = expressionInterceptUrlRegistry
                 .antMatchers("/teachers/**")
-                .hasAnyRole("MANAGER","ACTOR");*/
+                .hasAnyRole("MANAGER","ACTOR");*//*
+
 
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry expressionInterceptUrlRegistry =
                 http.cors()
@@ -96,12 +104,12 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
                 .csrf().disable() //
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //
                 .and() //
-                .exceptionHandling().accessDeniedHandler(getCustomAccessDeniedHandler())
-                        .and()
+               // .exceptionHandling().accessDeniedHandler(getCustomAccessDeniedHandler())
+                //        .and()
                 .authorizeRequests().antMatchers( "/favicon.ico").permitAll();
 
 
-        expressionInterceptUrlRegistry = expressionInterceptUrlRegistry.antMatchers("/student/*").hasRole("STUDENT");
+        expressionInterceptUrlRegistry = expressionInterceptUrlRegistry.antMatchers("/books/*").hasRole("STUDENT");
         expressionInterceptUrlRegistry = expressionInterceptUrlRegistry.antMatchers("/admin/*").hasRole("ADMIN");
         expressionInterceptUrlRegistry = expressionInterceptUrlRegistry.anyRequest().authenticated();
 
@@ -181,4 +189,15 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
                 "/configuration/security", "/swagger-ui.html", "/webjars/**","/swagger-ui/index.html","/v3/api-docs/**","/swagger-ui/**");
     }
 
-}
+    */
+/**
+     * Load Keycloak configuration from application.properties or application.yml, rather than keycloak.json.
+     *//*
+
+    @Bean
+    public KeycloakSpringBootConfigResolver keycloakConfigResolver() {
+        return new KeycloakSpringBootConfigResolver();
+    }
+
+
+}*/

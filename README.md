@@ -21,3 +21,7 @@ sudo docker stop $(sudo docker ps -q --filter ancestor='my-keycloak' )
 1. Go to spring boot
 2. mvn clean install
 3. mvn spring-boot:run
+
+
+## RND FOR Client credential
+https://www.baeldung.com/spring-boot-react-crud

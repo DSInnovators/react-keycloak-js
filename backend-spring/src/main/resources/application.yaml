@@ -1,13 +1,15 @@
 keycloak:
-  realm: master
-  resource: master-realm
+  realm: BANBEIS
+  resource: teacher-client
   auth-server-url: http://localhost:8000/auth
   credentials:
-    secret: 5f569b17-3e14-40c4-92a0-983bb172b7c8
+    secret: 2652a05c-3b87-4a2e-9941-36428f3b2176
   public-client: false
   use-resource-role-mappings: true
   principal-attribute: sub
   cors: true
+keycloak-configuration-cert-url: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/certs
+
 
 
 # ROLE BASED AUTH
