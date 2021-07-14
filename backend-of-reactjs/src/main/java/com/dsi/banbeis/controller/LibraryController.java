@@ -11,6 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -35,22 +37,22 @@ public class LibraryController {
 	@GetMapping(value = "/books")
 	public String getBooks(Model model, HttpSession session) {
 
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-		if(authentication !=null){
-			KeycloakPrincipal keycloakPrincipal = (KeycloakPrincipal) authentication.getPrincipal();
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+				.currentRequestAttributes()).getRequest();
+		KeycloakPrincipal keycloakPrincipal = (KeycloakPrincipal) request.getUserPrincipal();
 
-			AccessToken token = keycloakPrincipal.getKeycloakSecurityContext().getToken();
+		AccessToken token = keycloakPrincipal.getKeycloakSecurityContext().getToken();
 
-			System.out.println(authentication);
-			System.out.println(token.getEmail());
-		}
-
+		//System.out.println(authentication);
+		System.out.println(token.getEmail());
+		//redirect to react
+		//
 
 		configCommonAttributes(model);
 		model.addAttribute("books", bookRepository.readAll());
 		model.addAttribute("session_id",session.getId());
-		return "books";
+		return "session_id";
 	}
 
 	@GetMapping(value = "/manager")
