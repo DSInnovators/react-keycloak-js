@@ -49,7 +49,8 @@ public class KeycloakConfig extends KeycloakWebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
-        http.cors()
+        http
+                .cors()
                 .and()
                 .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
@@ -57,9 +58,10 @@ public class KeycloakConfig extends KeycloakWebSecurityConfigurerAdapter {
             response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
         })
                 .and()
+                .antMatcher("*/**")
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("admin")
-                .antMatchers("/books/**").hasRole("student")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/books/**").hasRole("LIBRARIAN")
                 .anyRequest().permitAll();
     }
 }
