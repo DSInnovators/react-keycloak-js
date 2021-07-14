@@ -34,14 +34,14 @@ public class LibraryController {
 	@GetMapping(value = "/books")
 	public String getBooks(Model model) {
 
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		/*Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		KeycloakPrincipal keycloakPrincipal = (KeycloakPrincipal) authentication.getPrincipal();
 
 		AccessToken token = keycloakPrincipal.getKeycloakSecurityContext().getToken();
 
 		System.out.println(authentication);
-		System.out.println(token.getEmail());
+		System.out.println(token.getEmail());*/
 
 		configCommonAttributes(model);
 		model.addAttribute("books", bookRepository.readAll());
