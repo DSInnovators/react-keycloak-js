@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class LibraryController {
@@ -32,19 +33,23 @@ public class LibraryController {
 	}*/
 
 	@GetMapping(value = "/books")
-	public String getBooks(Model model) {
+	public String getBooks(Model model, HttpSession session) {
 
-		/*Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-		KeycloakPrincipal keycloakPrincipal = (KeycloakPrincipal) authentication.getPrincipal();
+		if(authentication !=null){
+			KeycloakPrincipal keycloakPrincipal = (KeycloakPrincipal) authentication.getPrincipal();
 
-		AccessToken token = keycloakPrincipal.getKeycloakSecurityContext().getToken();
+			AccessToken token = keycloakPrincipal.getKeycloakSecurityContext().getToken();
 
-		System.out.println(authentication);
-		System.out.println(token.getEmail());*/
+			System.out.println(authentication);
+			System.out.println(token.getEmail());
+		}
+
 
 		configCommonAttributes(model);
 		model.addAttribute("books", bookRepository.readAll());
+		model.addAttribute("session_id",session.getId());
 		return "books";
 	}
 
