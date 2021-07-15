@@ -1,25 +1,33 @@
 package com.dsi.banbeis.controller;
 
 
+import com.dsi.banbeis.model.Book;
 import com.dsi.banbeis.repository.BookRepository;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
+@CrossOrigin("*")
 public class LibraryController {
+
+	String redirectUrl = "http" + "://localhost:3000";
 	private final HttpServletRequest request;
 	private final BookRepository bookRepository;
 
@@ -29,10 +37,13 @@ public class LibraryController {
 		this.bookRepository = bookRepository;
 	}
 
-/*	@GetMapping(value = "/")
-	public String getHome() {
-		return "index";
-	}*/
+	@GetMapping(value = "books/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Book>
+	all() {
+/*		configCommonAttributes(model);
+		model.addAttribute("books", bookRepository.readAll());*/
+		return  bookRepository.readAll();
+	}
 
 	@GetMapping(value = "/books")
 	public String getBooks(Model model, HttpSession session) {
@@ -52,7 +63,9 @@ public class LibraryController {
 		configCommonAttributes(model);
 		model.addAttribute("books", bookRepository.readAll());
 		model.addAttribute("session_id",session.getId());
-		return "session_id";
+
+		//String redirectUrl = "http" + "://demo-board.com";
+		return "redirect:" + redirectUrl;
 	}
 
 	@GetMapping(value = "/manager")
@@ -65,7 +78,7 @@ public class LibraryController {
 	@GetMapping(value = "/logout")
 	public String logout() throws ServletException {
 		request.logout();
-		return "redirect:/";
+		return "redirect:"+redirectUrl;
 	}
 
 	private void configCommonAttributes(Model model) {

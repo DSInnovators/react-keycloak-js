@@ -29,6 +29,9 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.Arrays;
 
 @KeycloakConfiguration
 @ComponentScan(basePackageClasses = KeycloakSecurityComponents.class)
@@ -74,7 +77,7 @@ public class KeycloakConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/books/**").hasRole("LIBRARIAN")
 
-                .anyRequest().permitAll();
+                .anyRequest().authenticated();
     }
 
     @Bean

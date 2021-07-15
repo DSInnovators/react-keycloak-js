@@ -1,0 +1,122 @@
+import logo from './logo.svg';
+import './App.css';
+import axios from "axios";
+
+
+const LIST_STUDENTS = 'http://localhost:8080/books/all';
+const LIST_ADMINS = 'http://localhost:8080/admin/all';
+
+
+const _axios = axios.create();
+
+function App() {
+    const getStudentData = async ()=>{
+        console.log('Cookie created name : user ');
+
+
+        _axios.get(LIST_STUDENTS,{withCredentials: true})
+            .then(res => {
+                console.log(res);
+            })
+            .catch(error => {
+                    alert('You are not authorize to view the content')
+                    console.log("Error occured " + error)
+                }
+            )
+
+        /* const config = {
+             headers: {
+                 'Content-Type': 'application/json',
+                 'Authorization': 'Bearer ' +  session.accessToken
+             }
+         }
+
+         await axios.get(BASE_URL_STUDENT,config)
+             .then(res => {
+                 console.log(res);
+             })
+             .catch(error => {
+                     alert('You are not authorize to view the content')
+                     console.log("Error occured " + error)
+                 }
+             )*/
+    }
+
+    const getAdminData = async ()=>{
+        console.log('Cookie created name : user ');
+
+
+        _axios.get(LIST_ADMINS)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(error => {
+                    alert('You are not authorize to view the content')
+                    console.log("Error occured " + error)
+                }
+            )
+
+        /* const config = {
+             headers: {
+                 'Content-Type': 'application/json',
+                 'Authorization': 'Bearer ' +  session.accessToken
+             }
+         }
+
+         await axios.get(BASE_URL_STUDENT,config)
+             .then(res => {
+                 console.log(res);
+             })
+             .catch(error => {
+                     alert('You are not authorize to view the content')
+                     console.log("Error occured " + error)
+                 }
+             )*/
+    }
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="http://localhost:8080/books"
+
+          rel="noopener noreferrer"
+        >
+          Login
+        </a>
+
+              <a
+          className="App-link"
+          href="http://localhost:8080/logout"
+
+          rel="noopener noreferrer"
+        >
+              logout
+        </a>
+
+        <div>
+    <button
+    type="button"
+    className="btn btn-primary"
+    onClick={getStudentData}>
+        GetStudentData
+        </button>
+
+        <button
+    type="button"
+    className="btn btn-danger"
+    onClick={getAdminData}>
+        getAdminData
+        </button>
+        </div>
+      </header>
+    </div>
+  );
+}
+
+export default App;
