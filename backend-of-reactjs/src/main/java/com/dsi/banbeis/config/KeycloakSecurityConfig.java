@@ -1,203 +1,105 @@
 package com.dsi.banbeis.config;
 
-
-
 import org.keycloak.adapters.KeycloakConfigResolver;
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
-import org.keycloak.adapters.springboot.KeycloakSpringBootProperties;
-import org.keycloak.adapters.springsecurity.KeycloakSecurityComponents;
+import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
 import org.keycloak.adapters.springsecurity.client.KeycloakClientRequestFactory;
+import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
-import org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticatedActionsFilter;
-import org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter;
-import org.keycloak.adapters.springsecurity.filter.KeycloakPreAuthActionsFilter;
-import org.keycloak.adapters.springsecurity.filter.KeycloakSecurityContextRequestFilter;
-import org.keycloak.adapters.springsecurity.management.HttpSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-/*
-@EnableWebSecurity
-@Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true,
-        securedEnabled = true,
-        jsr250Enabled = true)
-@ComponentScan(basePackageClasses = KeycloakSecurityComponents.class)
+import java.util.Collections;
+
+@KeycloakConfiguration
 public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
 
-    private final KeycloakClientRequestFactory keycloakClientRequestFactory;
-
-
-    public KeycloakSecurityConfig(KeycloakClientRequestFactory keycloakClientRequestFactory) {
-        this.keycloakClientRequestFactory = keycloakClientRequestFactory;
-        SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
-    }
-
-   */
-/* @Bean
-    public AuthenticationEntryPoint authenticationEntryPoint(){
-        return new CustomAuthenticationEntryPoint();
-    }
-
-    @Bean
-    @Primary
-    public KeycloakConfigResolver keycloakConfigResolver(KeycloakSpringBootProperties properties) {
-        return new CustomKeycloakSpringBootConfigResolver(properties);
-    }*//*
-
-
-
+    /**
+     * Registers KeycloakAuthenticationProvider with spring security's authentication manager.
+     */
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) {
-        KeycloakAuthenticationProvider keycloakAuthenticationProvider = keycloakAuthenticationProvider();
-        auth.authenticationProvider(keycloakAuthenticationProvider);
+    public void configureGlobal(AuthenticationManagerBuilder authBuilder) {
+        KeycloakAuthenticationProvider provider = keycloakAuthenticationProvider();
+
+        // Setting this so the adapter automatically adds ROLE_ prefix to roles defined in Keycloak
+        // Spring Security expects ROLE_ prefixes in all roles
+        provider.setGrantedAuthoritiesMapper(new SimpleAuthorityMapper());
+
+        authBuilder.authenticationProvider(provider);
     }
 
+    /**
+     * This is provided by the Keycloak adapter library.
+     */
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    public KeycloakClientRequestFactory keycloakClientRequestFactory;
+
+    /**
+     * Use Spring Boot native configuration for Keycloak.
+     */
     @Bean
+    public KeycloakConfigResolver configResolver() {
+        return new KeycloakSpringBootConfigResolver();
+    }
+
+    /**
+     * Define session authentication strategy. As this is a bearer-only client, we
+     * are using the NullAuthenticatedSessionStrategy.
+     */
     @Override
     protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
         return new NullAuthenticatedSessionStrategy();
     }
 
-   */
-/* @Bean
-    public AccessDeniedHandler getCustomAccessDeniedHandler(){
-        return new CustomAccessDeniedHandler();
-    }*//*
-
-
-
+    /**
+     * Global authorization configuration. Also, enables Spring Security CORS handling.
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
-
-         */
-/* expressionInterceptUrlRegistry = expressionInterceptUrlRegistry
-                .antMatchers("/teachers/**")
-                .hasAnyRole("MANAGER","ACTOR");*//*
-
-
-        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry expressionInterceptUrlRegistry =
-                http.cors()
-                .and()
-                .csrf().disable() //
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //
-                .and() //
-               // .exceptionHandling().accessDeniedHandler(getCustomAccessDeniedHandler())
-                //        .and()
-                .authorizeRequests().antMatchers( "/favicon.ico").permitAll();
-
-
-        expressionInterceptUrlRegistry = expressionInterceptUrlRegistry.antMatchers("/books/*").hasRole("STUDENT");
-        expressionInterceptUrlRegistry = expressionInterceptUrlRegistry.antMatchers("/admin/*").hasRole("ADMIN");
-        expressionInterceptUrlRegistry = expressionInterceptUrlRegistry.anyRequest().authenticated();
-
+        http.authorizeRequests()
+                .antMatchers("/logout").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/books/**").hasRole("LIBRARIAN")
+                .anyRequest().denyAll()
+                .and().logout().clearAuthentication(true).invalidateHttpSession(true).deleteCookies("MYSESSIONID")
+                .logoutUrl("/logout")
+        ;
+        http.cors();
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    /**
+     * Provide CORS configuration for Spring Security. Allowing all origins and methods for now.
+     */
     @Bean
-    public FilterRegistrationBean keycloakAuthenticationProcessingFilterRegistrationBean(KeycloakAuthenticationProcessingFilter filter) {
-
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean(filter);
-        registrationBean.setEnabled(false);
-        return registrationBean;
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.applyPermitDefaultValues();
+        configuration.setAllowedMethods(Collections.singletonList("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+
+    /**
+     * Helpful template to call upstream service providers passing the access token.
+     */
     @Bean
-    public FilterRegistrationBean keycloakPreAuthActionsFilterRegistrationBean(KeycloakPreAuthActionsFilter filter) {
-
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean(filter);
-        registrationBean.setEnabled(false);
-        return registrationBean;
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public KeycloakRestTemplate keycloakRestTemplate() {
+        return new KeycloakRestTemplate(keycloakClientRequestFactory);
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    @Bean
-    public FilterRegistrationBean keycloakAuthenticatedActionsFilterBean(KeycloakAuthenticatedActionsFilter filter) {
-
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean(filter);
-        registrationBean.setEnabled(false);
-        return registrationBean;
-    }
-
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    @Bean
-    public FilterRegistrationBean keycloakSecurityContextRequestFilterBean(KeycloakSecurityContextRequestFilter filter) {
-
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean(filter);
-        registrationBean.setEnabled(false);
-        return registrationBean;
-    }
-
-    @Bean
-    @Override
-    @ConditionalOnMissingBean(HttpSessionManager.class)
-    protected HttpSessionManager httpSessionManager() {
-        return new HttpSessionManager();
-    }
-
-    @Bean
-    public ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
-        return new ServletListenerRegistrationBean<>(new HttpSessionEventPublisher());
-    }
-
-
-
-    @Bean
-    public GrantedAuthoritiesMapper grantedAuthoritiesMapper() {
-        SimpleAuthorityMapper mapper = new SimpleAuthorityMapper();
-        mapper.setConvertToUpperCase(true);
-        return mapper;
-    }
-
-    @Override
-    protected KeycloakAuthenticationProvider keycloakAuthenticationProvider() {
-        final KeycloakAuthenticationProvider provider = super.keycloakAuthenticationProvider();
-        provider.setGrantedAuthoritiesMapper(grantedAuthoritiesMapper());
-        return provider;
-    }
-
-    @Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(keycloakAuthenticationProvider());
-    }
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/keycloak/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources",
-                "/configuration/security", "/swagger-ui.html", "/webjars/**","/swagger-ui/index.html","/v3/api-docs/**","/swagger-ui/**");
-    }
-
-    */
-/**
-     * Load Keycloak configuration from application.properties or application.yml, rather than keycloak.json.
-     *//*
-
-    @Bean
-    public KeycloakSpringBootConfigResolver keycloakConfigResolver() {
-        return new KeycloakSpringBootConfigResolver();
-    }
-
-
-}*/
+}
