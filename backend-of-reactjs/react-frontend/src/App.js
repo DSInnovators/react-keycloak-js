@@ -13,16 +13,42 @@ function App() {
     const getStudentData = async ()=>{
         console.log('Cookie created name : user ');
 
+      /*  fetch(LIST_STUDENTS, {
+            method: 'GET',
+            credentials: 'include'
+        })
+            .then((response) => {
+                console.log(response);
+                return response.json()
+            })
+            .then((json) => {
+                console.log(json);
+                console.log('Gotcha');
+            }).catch((err) => {
+            console.log(err);
+        });*/
+        fetch(LIST_STUDENTS, {
+            method: "GET",
+            credentials: 'include',
+            headers: {
+                "Content-Type": "text/plain"
+            }
+        }).then(function(response) {
+            console.log(response);
+            return response.json();
+        }).then(function(muutuja){
+            console.log(muutuja);
+        });
 
-        _axios.get(LIST_STUDENTS,{withCredentials: true})
-            .then(res => {
-                console.log(res);
+      /*  _axios.get(LIST_STUDENTS,{withCredentials: true})
+            .then(({ data }) => {
+                console.log(data);
             })
             .catch(error => {
                     alert('You are not authorize to view the content')
                     console.log("Error occured " + error)
                 }
-            )
+            )*/
 
         /* const config = {
              headers: {

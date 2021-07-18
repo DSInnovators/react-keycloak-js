@@ -37,13 +37,7 @@ public class LibraryController {
 		this.bookRepository = bookRepository;
 	}
 
-	@GetMapping(value = "books/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Book>
-	all() {
-/*		configCommonAttributes(model);
-		model.addAttribute("books", bookRepository.readAll());*/
-		return  bookRepository.readAll();
-	}
+
 
 	@GetMapping(value = "/books")
 	public String getBooks(Model model, HttpSession session) {
