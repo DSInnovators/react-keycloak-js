@@ -70,12 +70,14 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         http.authorizeRequests()
-                .antMatchers("/logout").permitAll()
+                //.antMatchers("/logout").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/books/**").hasRole("LIBRARIAN")
-                .anyRequest().denyAll()
-                .and().logout().clearAuthentication(true).invalidateHttpSession(true).deleteCookies("MYSESSIONID")
+                .anyRequest().authenticated()
+                .and()
+                .logout()
                 .logoutUrl("/logout")
+                .logoutSuccessUrl("/");
         ;
         http.cors();
     }
