@@ -1,5 +1,5 @@
 {
-  "realm": "BANBEIS",
+  "realm": "BANBEIS-BROKER",
   "enabled": true,
   "sslRequired": "NONE",
   "registrationAllowed": true,
@@ -20,16 +20,16 @@
       "linkOnly": false,
       "firstBrokerLoginFlowAlias": "first broker login",
       "config": {
-        "userInfoUrl": "http://localhost:8000/auth/realms/BANBEIS/protocol/openid-connect/userinfo",
+        "userInfoUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/userinfo",
         "validateSignature": "true",
         "clientId": "next-client",
-        "tokenUrl": "http://localhost:8000/auth/realms/BANBEIS/protocol/openid-connect/token",
-        "jwksUrl": "http://localhost:8000/auth/realms/BANBEIS/protocol/openid-connect/certs",
-        "issuer": "http://localhost:8000/auth/realms/BANBEIS",
+        "tokenUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/token",
+        "jwksUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/certs",
+        "issuer": "http://localhost:8000/auth/realms/BANBEIS-1",
         "useJwksUrl": "true",
-        "authorizationUrl": "http://localhost:8000/auth/realms/BANBEIS/protocol/openid-connect/auth",
+        "authorizationUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/auth",
         "clientAuthMethod": "private_key_jwt",
-        "logoutUrl": "http://localhost:8000/auth/realms/BANBEIS/protocol/openid-connect/logout",
+        "logoutUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/logout",
         "clientAssertionSigningAlg": "RS256",
         "syncMode": "IMPORT"
       }
@@ -47,16 +47,16 @@
       "linkOnly": false,
       "firstBrokerLoginFlowAlias": "first broker login",
       "config": {
-        "userInfoUrl": "http://localhost:8001/auth/realms/BANBEIS/protocol/openid-connect/userinfo",
+        "userInfoUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/userinfo",
         "validateSignature": "true",
         "clientId": "next-client-2",
-        "tokenUrl": "http://localhost:8001/auth/realms/BANBEIS/protocol/openid-connect/token",
-        "jwksUrl": "http://localhost:8001/auth/realms/BANBEIS/protocol/openid-connect/certs",
-        "issuer": "http://localhost:8001/auth/realms/BANBEIS",
+        "tokenUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/token",
+        "jwksUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/certs",
+        "issuer": "http://localhost:8001/auth/realms/BANBEIS-2",
         "useJwksUrl": "true",
-        "authorizationUrl": "http://localhost:8001/auth/realms/BANBEIS/protocol/openid-connect/auth",
+        "authorizationUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/auth",
         "clientAuthMethod": "private_key_jwt",
-        "logoutUrl": "http://localhost:8001/auth/realms/BANBEIS/protocol/openid-connect/logout",
+        "logoutUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/logout",
         "clientAssertionSigningAlg": "RS256",
         "syncMode": "IMPORT"
       }
