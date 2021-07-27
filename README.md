@@ -1,16 +1,17 @@
 # react-keycloak-js
 
-## KEYCLOAK
-1. Go to keycloak folder
+## KEYCLOAK FOLDERS
+1. Go to keycloak folders
 2. To start run
 
-sudo docker build -t my-keycloak .
+sudo docker build -t <NAME OF CONTAINER> .
  
-sudo docker run -dp 8000:8080 my-keycloak
+## 8000 and 8001 for keycloak and keycloak-2 respectively and 8002 for keycloak-broker  
+sudo docker run -dp <PORT AS DEFINED ABOVE>:8080 <NAME OF CONTAINER>
 
 3. To stop the docker container
 
-sudo docker stop $(sudo docker ps -q --filter ancestor='my-keycloak' )
+sudo docker stop $(sudo docker ps -q --filter ancestor='<NAME OF CONTAINER>' )
 
 ## REACT JS
 1. Go to react folder
