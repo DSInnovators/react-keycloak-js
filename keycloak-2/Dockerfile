@@ -4,7 +4,7 @@
 FROM maven:3.6.0-jdk-11-slim AS build
 #COPY src /home/app/src
 #COPY pom.xml /home/app
-COPY realm.json /tmp/realm.json
+COPY keycloak-8001.json /tmp/realm.json
 #RUN mvn -f /home/app/pom.xml clean package
 
 #
