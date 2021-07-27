@@ -162,19 +162,18 @@
     },
     
     {
-      "clientId": "teacher-client",
-      "rootUrl": "http://localhost:3001/",
-      "adminUrl": "http://localhost:3001/",
+      "clientId": "next-client-2",
+      "rootUrl": "http://localhost:5000/",
+      "adminUrl": "http://localhost:5000/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "http://localhost:3001/*"
+        "http://localhost:5000/*"
       ],
       "webOrigins": [
-      	 "http://localhost:8080/*",
-        "http://localhost:3001"
+      	 "*"
       ],
       "notBefore": 0,
       "bearerOnly": false,
