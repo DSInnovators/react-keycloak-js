@@ -20,7 +20,7 @@
         }
       ],
       "clientRoles": {
-        "next-client": [ "student" ],
+        "next-client-2": [ "student" ],
         "account": [
           "view-profile",
           "manage-account"
@@ -40,7 +40,7 @@
         }
       ],
       "clientRoles": {
-        "next-client": [ "teacher" ],
+        "next-client-2": [ "teacher" ],
         "account": [
           "view-profile",
           "manage-account"
@@ -60,7 +60,7 @@
         }
       ],
       "clientRoles": {
-        "next-client": [ "admin" ],
+        "next-client-2": [ "admin" ],
         "account": [
           "view-profile",
           "manage-account"
