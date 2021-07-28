@@ -24,5 +24,7 @@ ENV DB_VENDOR h2
 
 ENV KEYCLOAK_IMPORT /tmp/realm.json
 
+CMD ["-b 0.0.0.0"]
+
 EXPOSE 8080
 

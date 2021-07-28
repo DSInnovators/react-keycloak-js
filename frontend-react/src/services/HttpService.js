@@ -13,6 +13,9 @@ const _axios = axios.create();
 _axios.interceptors.request.use((config) => {
   console.log('using interceptor: login',UserService.isLoggedIn());
   if (UserService.isLoggedIn()) {
+
+    console.log('Token',UserService.getToken())
+
     const cb = () => {
       /*config.headers.Authorization = `Bearer ${UserService.getToken()}`;
       config.headers.ContentType = 'application/json';*/
