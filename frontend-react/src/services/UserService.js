@@ -16,13 +16,6 @@ const initKeycloak = (onAuthenticatedCallback) => {
     onLoad: 'check-sso',
     silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
     pkceMethod: 'S256',
-  }).success(function(authenticated){
-    if(authenticated){
-      console.log("logged in");
-    }
-    else{
-      _kc.login({idpHint:'keycloak-dhaka'});
-    }
   })
     .then((authenticated) => {
       // if (authenticated) {
@@ -33,7 +26,9 @@ const initKeycloak = (onAuthenticatedCallback) => {
     })
 };
 
-const doLogin = _kc.login;
+const doLogin = () => {
+  return _kc.login({idpHint:'keycloak-dhaka'});
+}
 
 const doLogout = _kc.logout;
 
