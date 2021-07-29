@@ -3,12 +3,14 @@ FROM maven:3.6.0-jdk-11-slim AS build
 
 COPY realm-dhaka.json /tmp/realm-dhaka.json
 COPY realm-barisal.json /tmp/realm-barisal.json
+#COPY realm-master.json /tmp/realm-master.json
 
 FROM quay.io/keycloak/keycloak:14.0.0
 
 
 COPY --from=build /tmp/realm-dhaka.json /tmp/realm-dhaka.json
 COPY --from=build /tmp/realm-barisal.json /tmp/realm-barisal.json
+#COPY --from=build /tmp/realm-master.json /tmp/realm-master.json
 
 ENV KEYCLOAK_USER admin
 ENV KEYCLOAK_PASSWORD admin
@@ -22,6 +24,9 @@ ENV DB_VENDOR h2
 #CMD ["-Dkeycloak.migration.action=import", "-Dkeycloak.migration.provider=singleFile", "-Dkeycloak.migration.file=/tmp/realm-barisal.json", "-Dkeycloak.migration.strategy=IGNORE_EXISTING"]
 
 CMD ["-Dkeycloak.import=/tmp/realm-dhaka.json,/tmp/realm-barisal.json"]
+
+#CMD ["-Dkeycloak.migration.action=import", "-Dkeycloak.migration.provider=singleFile", "-Dkeycloak.migration.file=,/tmp/realm-master.json", "-Dkeycloak.migration.strategy=IGNORE_EXISTING"]
+
 
 EXPOSE 8080
 

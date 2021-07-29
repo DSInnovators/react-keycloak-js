@@ -43,21 +43,6 @@
   "quickLoginCheckMilliSeconds": 1000,
   "maxDeltaTimeSeconds": 43200,
   "failureFactor": 30,
-  "users": [
-    {
-      "username": "barisal",
-      "enabled": true,
-      "email": "barisal@demo.com",
-      "firstName": "barisal",
-      "lastName": "Apprentice",
-      "credentials": [
-        {
-          "type": "password",
-          "value": "barisal"
-        }
-      ]
-    }
-  ],
   "roles": {
     "realm": [
       {
@@ -612,7 +597,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "8e113808-3bbd-4280-b1d5-f34369a4b7c8",
+      "secret": "**********",
       "redirectUris": [
         "http://localhost:8000/*"
       ],
