@@ -1,68 +1,11 @@
 {
-  "realm": "BANBEIS-BROKER",
+  "realm": "RELAM-DHAKA",
   "enabled": true,
   "sslRequired": "NONE",
   "registrationAllowed": true,
   "requiredCredentials": [
     "password"
   ],
-  "identityProviders": [
-    {
-      "alias": "keycloak-dhaka",
-      "internalId": "f7abc3cc-b266-4487-97d7-d66f3e268803",
-      "providerId": "keycloak-oidc",
-      "enabled": true,
-      "updateProfileFirstLoginMode": "on",
-      "trustEmail": false,
-      "storeToken": true,
-      "addReadTokenRoleOnCreate": true,
-      "authenticateByDefault": false,
-      "linkOnly": false,
-      "firstBrokerLoginFlowAlias": "first broker login",
-      "config": {
-        "userInfoUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/userinfo",
-        "validateSignature": "true",
-        "clientId": "next-client",
-        "tokenUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/token",
-        "jwksUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/certs",
-        "issuer": "http://localhost:8000/auth/realms/BANBEIS-1",
-        "useJwksUrl": "true",
-        "authorizationUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/auth",
-        "clientAuthMethod": "private_key_jwt",
-        "logoutUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/logout",
-        "clientAssertionSigningAlg": "RS256",
-        "syncMode": "IMPORT"
-      }
-    },
-    {
-      "alias": "keycloak-barisal",
-      "internalId": "391c53df-2fd6-4509-8e21-87675a9b084f",
-      "providerId": "keycloak-oidc",
-      "enabled": true,
-      "updateProfileFirstLoginMode": "on",
-      "trustEmail": false,
-      "storeToken": true,
-      "addReadTokenRoleOnCreate": true,
-      "authenticateByDefault": false,
-      "linkOnly": false,
-      "firstBrokerLoginFlowAlias": "first broker login",
-      "config": {
-        "userInfoUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/userinfo",
-        "validateSignature": "true",
-        "clientId": "next-client-2",
-        "tokenUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/token",
-        "jwksUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/certs",
-        "issuer": "http://localhost:8001/auth/realms/BANBEIS-2",
-        "useJwksUrl": "true",
-        "authorizationUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/auth",
-        "clientAuthMethod": "private_key_jwt",
-        "logoutUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/logout",
-        "clientAssertionSigningAlg": "RS256",
-        "syncMode": "IMPORT"
-      }
-    }
-  ],
-  
   "roles": {
 
     "client" : {
@@ -103,7 +46,8 @@
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "http://localhost:3000/*"
+        "http://localhost:3000/*",
+		"http://localhost:8002/*"
       ],
       "webOrigins": [
       	 "http://localhost:8080/*",
@@ -162,18 +106,19 @@
     },
     
     {
-      "clientId": "next-client-2",
-      "rootUrl": "http://localhost:5000/",
-      "adminUrl": "http://localhost:5000/",
+      "clientId": "teacher-client",
+      "rootUrl": "http://localhost:3001/",
+      "adminUrl": "http://localhost:3001/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "http://localhost:5000/*"
+        "http://localhost:3001/*"
       ],
       "webOrigins": [
-      	 "*"
+      	 "http://localhost:8080/*",
+        "http://localhost:3001"
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -326,6 +271,21 @@
         "phone",
         "offline_access",
         "microprofile-jwt"
+      ]
+    }
+  ],
+   "users": [
+    {
+      "username": "dhaka",
+      "enabled": true,
+      "email": "dhaka@smg.com",
+      "firstName": "dhaka",
+      "lastName": "Apprentice",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "dhaka"
+        }
       ]
     }
   ],
