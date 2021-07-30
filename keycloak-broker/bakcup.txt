@@ -1,0 +1,22 @@
+#RUN /opt/jboss/keycloak/bin/add-user-keycloak.sh -r master -u abc -p abc --roles 'admin'
+
+#RUN /opt/jboss/keycloak/bin/add-user-keycloak.sh -r master -u abc -p abc --roles '"clientRoles": {"BANBEIS-BROKER-realm":[ "manage-realm" ]'
+
+#RUN /opt/jboss/keycloak/bin/add-user-keycloak.sh -r master -u abc -p abc --roles '={"guid":["q"]}'
+
+#RUN /opt/jboss/keycloak/bin/kcadm.sh config credentials --server http://localhost:${KEYCLOAK_PORT}/auth --user $KEYCLOAK_ADMIN_USER --password $KEYCLOAK_ADMIN_PASSWORD --realm master
+
+#RUN /opt/jboss/keycloak/bin/kcadm.sh add-roles -r master --uusername abc --cclientid realm-management --rolename create-client --rolename view-users
+
+#RUN /opt/jboss/keycloak/bin/kcadm.sh add-roles --u abc BANBEIS-BROKER-realm --rolename manage-realm -r master
+
+#RUN /opt/jboss/keycloak/bin/add-user-keycloak.sh -r master -u abc -p abc --roles 'clientRoles:{'BANBEIS-BROKER-realm':['manage--realm]}'
+
+
+
+
+#CMD ["/opt/jboss/keycloak/bin/add-user-keycloak.sh -r master -u abc -p abc"]
+
+#RUN echo { "realm": "demorealm", "enabled": true } | /opt/jboss/keycloak/bin/kcadm.sh create realms -f -
+
+#RUN /opt/jboss/keycloak/bin/add-user-keycloak.sh /tmp/realm-master.json 

@@ -20,16 +20,16 @@
       "linkOnly": false,
       "firstBrokerLoginFlowAlias": "first broker login",
       "config": {
-        "userInfoUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/userinfo",
+        "userInfoUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/userinfo",
         "validateSignature": "true",
         "clientId": "next-client",
-        "tokenUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/token",
-        "jwksUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/certs",
-        "issuer": "http://localhost:8000/auth/realms/BANBEIS-1",
+        "tokenUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/token",
+        "jwksUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/certs",
+        "issuer": "http://localhost:8001/auth/realms/DHAKA",
         "useJwksUrl": "true",
-        "authorizationUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/auth",
+        "authorizationUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/auth",
         "clientAuthMethod": "private_key_jwt",
-        "logoutUrl": "http://localhost:8000/auth/realms/BANBEIS-1/protocol/openid-connect/logout",
+        "logoutUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/logout",
         "clientAssertionSigningAlg": "RS256",
         "syncMode": "IMPORT"
       }
@@ -47,16 +47,16 @@
       "linkOnly": false,
       "firstBrokerLoginFlowAlias": "first broker login",
       "config": {
-        "userInfoUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/userinfo",
+        "userInfoUrl": "http://localhost:8001/auth/realms/BARISAL/protocol/openid-connect/userinfo",
         "validateSignature": "true",
         "clientId": "next-client-2",
-        "tokenUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/token",
-        "jwksUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/certs",
-        "issuer": "http://localhost:8001/auth/realms/BANBEIS-2",
+        "tokenUrl": "http://localhost:8001/auth/realms/BARISAL/protocol/openid-connect/token",
+        "jwksUrl": "http://localhost:8001/auth/realms/BARISAL/protocol/openid-connect/certs",
+        "issuer": "http://localhost:8001/auth/realms/BARISAL",
         "useJwksUrl": "true",
-        "authorizationUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/auth",
+        "authorizationUrl": "http://localhost:8001/auth/realms/BARISAL/protocol/openid-connect/auth",
         "clientAuthMethod": "private_key_jwt",
-        "logoutUrl": "http://localhost:8001/auth/realms/BANBEIS-2/protocol/openid-connect/logout",
+        "logoutUrl": "http://localhost:8001/auth/realms/BARISAL/protocol/openid-connect/logout",
         "clientAssertionSigningAlg": "RS256",
         "syncMode": "IMPORT"
       }
@@ -331,15 +331,15 @@
   ],
   "users": [
     {
-      "username": "broker",
+      "username": "brokeruser",
       "enabled": true,
       "email": "broker@smg.com",
-      "firstName": "broker",
+      "firstName": "brokeruser",
       "lastName": "Apprentice",
       "credentials": [
         {
           "type": "password",
-          "value": "broker"
+          "value": "brokeruser"
         }
       ]
     }
