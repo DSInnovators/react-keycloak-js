@@ -2,13 +2,13 @@
 FROM maven:3.6.0-jdk-11-slim AS build
 
 COPY keycloak-8000.json /tmp/realm.json
-COPY realm-master.json /tmp/realm-master.json
+COPY realm-master.json /tmp/master.json
 
 
 FROM quay.io/keycloak/keycloak:14.0.0
 
 COPY --from=build /tmp/realm.json /tmp/realm.json
-COPY --from=build /tmp/realm-master.json /tmp/realm-master.json
+COPY --from=build /tmp/master.json /tmp/master.json
 
 ENV KEYCLOAK_USER admin
 ENV KEYCLOAK_PASSWORD admin
@@ -17,7 +17,12 @@ ENV KEYCLOAK_LOGLEVEL=DEBUG
 ENV DB_VENDOR h2
 
 
-CMD ["-Dkeycloak.import=/tmp/realm-master.json"]
+#ENV KEYCLOAK_IMPORT /tmp/realm.json
+#ENV KEYCLOAK_MIGRATION_STRATEGY OVERWRITE_EXISTING
+
+
+CMD ["-Dkeycloak.import=/tmp/realm.json"]
+
 
 EXPOSE 8080
 

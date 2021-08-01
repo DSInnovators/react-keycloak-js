@@ -22,13 +22,14 @@
       "config": {
         "userInfoUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/userinfo",
         "validateSignature": "true",
-        "clientId": "next-client",
+        "clientId": "broker",
+		"clientSecret": "4b4aa59a-c183-40ba-84e4-39cbc69c24ac",
         "tokenUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/token",
         "jwksUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/certs",
         "issuer": "http://localhost:8001/auth/realms/DHAKA",
         "useJwksUrl": "true",
         "authorizationUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/auth",
-        "clientAuthMethod": "private_key_jwt",
+        "clientAuthMethod": "client_secret_basic",
         "logoutUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/logout",
         "clientAssertionSigningAlg": "RS256",
         "syncMode": "IMPORT"

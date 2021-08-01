@@ -14,6 +14,18 @@ services:
     restart: always
     networks: # Networks to join (Services on the same network can communicate with each other using their name)
       - backend
+      
+  keycloak-idp:
+    container_name: keycloak-idp
+    # Configuration for building the docker image for the backend service
+    build:
+      context: keycloak-idp # Use an image built from the specified dockerfile in the `keycloak-idp` directory.
+      dockerfile: IdpDockerfile
+    ports:
+      - "8001:8080" # Forward the exposed port 8080 on the container to port 8001 on the host machine
+    restart: always
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - backend
 
 # Networks to be created to facilitate communication between containers
 networks:

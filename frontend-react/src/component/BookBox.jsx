@@ -1,15 +1,23 @@
 import UserService from "../services/UserService";
 import Menu from "./Menu";
-import React from "react";
+import React, {useEffect} from "react";
 import { Route, Switch } from "react-router-dom";
 import axios from "axios";
 import HttpService from "../services/HttpService";
 import Akash from "./akash";
+import jwt_decode from "jwt-decode";
 
 const LIST_STUDENTS = 'http://localhost:8080/student/all';
 const LIST_ADMINS = 'http://localhost:8080/admin/all';
 
 const Welcome = () => {
+
+
+    useEffect(() => {
+
+        console.log(JSON.stringify(jwt_decode(UserService.getToken())))
+    }, []);
+
     const getStudentData = async ()=>{
         console.log('Cookie created name : user ');
 
@@ -82,6 +90,13 @@ const Welcome = () => {
           <Route exact path="/">
               {/*<BookList/>*/}
               List of books
+              <div>
+
+                  <pre> {JSON.stringify(jwt_decode(UserService.getToken()))} </pre>
+              </div>
+
+
+
               <button
                   type="button"
                   className="btn btn-primary"
