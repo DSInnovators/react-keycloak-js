@@ -1,0 +1,19 @@
+server:
+  port: 7070
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: "api-3"
+            client-name: "api-3"
+            client-secret: "c04c2750-f471-48c2-90f4-ecf6c6247e36"
+            provider: "keycloak"
+        provider:
+          keycloak:
+            issuer-uri: "http://localhost:8001/auth/realms/DHAKA"
+            jwk-set-uri: "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/certs"
+
+

@@ -1,7 +1,8 @@
 import Keycloak from "keycloak-js";
-
+import axios from "axios";
+import Cookies from 'js-cookie'
 const _kc = new Keycloak('/keycloak.json');
-
+const _idp_hint = 'keycloak-dhaka';
 
 
 
@@ -19,6 +20,7 @@ const initKeycloak = (onAuthenticatedCallback) => {
   })
     .then((authenticated) => {
       // if (authenticated) {
+        fetchIdpToken();
       onAuthenticatedCallback();
       // } else {
       //   doLogin();
@@ -27,7 +29,7 @@ const initKeycloak = (onAuthenticatedCallback) => {
 };
 
 const doLogin = () => {
-  return _kc.login({idpHint:'keycloak-dhaka'});
+  return _kc.login({idpHint:_idp_hint});
 }
 
 const doLogout = _kc.logout;
@@ -41,6 +43,34 @@ const updateToken = (successCallback) =>{
   return _kc.updateToken(5)
       .then(successCallback)
       .catch(doLogin);
+}
+
+const _axios = axios.create();
+
+const fetchIdpToken = () =>{
+
+  console.log('fetchIdpToken');
+
+  const url = 'http://localhost:8000/auth/realms/BANBEIS-BROKER/broker/keycloak-dhaka/token';
+
+  _axios.get(url,{
+       headers: {
+         'Authorization': 'Bearer ' + _kc.token
+       }}
+       ).then(res => {
+            console.log(res);
+
+            if(res.status == 200) {
+                const access_token = res.data.access_token;
+                console.log(res.data.access_token);
+                Cookies.set('access_token', access_token, { expires: 7, path: '' })
+            }
+
+      }).catch(error => {
+               //alert('You are not authorize to view the content')
+               console.log("Error occured " + error)
+             }
+         )
 }
 
 
@@ -106,7 +136,8 @@ const UserService = {
   getUsername,
   hasRole,
   //tokenExpired
-  hasClientRole
+  hasClientRole,
+  fetchIdpToken,
 };
 
 export default UserService;

@@ -7,8 +7,8 @@ import HttpService from "../services/HttpService";
 import Akash from "./akash";
 import jwt_decode from "jwt-decode";
 
-const LIST_STUDENTS = 'http://localhost:8080/student/all';
-const LIST_ADMINS = 'http://localhost:8080/admin/all';
+const LIST_STUDENTS = 'http://localhost:7070/user/hello';
+const LIST_ADMINS = 'http://localhost:7070/admin/hello';
 
 const Welcome = () => {
 
@@ -21,8 +21,10 @@ const Welcome = () => {
     const getStudentData = async ()=>{
         console.log('Cookie created name : user ');
 
+       // UserService.fetchIdpToken();
 
-        HttpService.getAxiosClient().get(LIST_STUDENTS)
+
+       HttpService.getAxiosClient().get(LIST_STUDENTS)
             .then(res => {
                 console.log(res);
             })

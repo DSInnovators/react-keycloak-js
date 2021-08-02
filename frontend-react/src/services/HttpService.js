@@ -1,5 +1,6 @@
 import axios from "axios";
 import UserService from "./UserService";
+import Cookies from 'js-cookie';
 
 const HttpMethods = {
   GET: 'GET',
@@ -14,13 +15,14 @@ _axios.interceptors.request.use((config) => {
   console.log('using interceptor: login',UserService.isLoggedIn());
   if (UserService.isLoggedIn()) {
 
-    console.log('Token',UserService.getToken())
+    const access_token = Cookies.get('access_token');
+    console.log('Token',access_token)
 
     const cb = () => {
       /*config.headers.Authorization = `Bearer ${UserService.getToken()}`;
       config.headers.ContentType = 'application/json';*/
       config.headers = {
-        'Authorization': `Bearer ${UserService.getToken()}`,
+        'Authorization': `Bearer ${Cookies.get('access_token')}`,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       };
