@@ -56,6 +56,14 @@
           "value": "dhaka"
         }
       ]
+	  ,
+      "clientRoles": {
+        "broker": [ "registration_manager" ],
+        "account": [
+          "view-profile",
+          "manage-account"
+        ]
+      }
     }
   ],
   "roles": {
@@ -1407,6 +1415,18 @@
       ]
     }
   ],
+  "roles": {
+
+    "client" : {
+      "broker" : [
+        {
+          "name": "registration_manager",
+          "description": "Registration manager privileges"
+        }
+
+      ]
+    }
+  },
   "defaultDefaultClientScopes": [
     "roles",
     "profile",

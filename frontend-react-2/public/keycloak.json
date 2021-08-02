@@ -1,5 +1,5 @@
 {
-  "realm": "BANBEIS-BROKER",
+  "realm": "DHAK",
   "auth-server-url": "http://localhost:8002/auth",
   "ssl-required": "external",
   "resource": "next-client-2",

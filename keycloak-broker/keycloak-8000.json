@@ -20,17 +20,17 @@
       "linkOnly": false,
       "firstBrokerLoginFlowAlias": "first broker login",
       "config": {
-        "userInfoUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/userinfo",
+        "userInfoUrl": "http://192.168.31.80:8001/auth/realms/DHAKA/protocol/openid-connect/userinfo",
         "validateSignature": "true",
         "clientId": "broker",
 		"clientSecret": "4b4aa59a-c183-40ba-84e4-39cbc69c24ac",
-        "tokenUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/token",
-        "jwksUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/certs",
-        "issuer": "http://localhost:8001/auth/realms/DHAKA",
+        "tokenUrl": "http://192.168.31.80:8001/auth/realms/DHAKA/protocol/openid-connect/token",
+        "jwksUrl": "http://192.168.31.80:8001/auth/realms/DHAKA/protocol/openid-connect/certs",
+        "issuer": "http://192.168.31.80:8001/auth/realms/DHAKA",
         "useJwksUrl": "true",
-        "authorizationUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/auth",
+        "authorizationUrl": "http://192.168.31.80:8001/auth/realms/DHAKA/protocol/openid-connect/auth",
         "clientAuthMethod": "client_secret_basic",
-        "logoutUrl": "http://localhost:8001/auth/realms/DHAKA/protocol/openid-connect/logout",
+        "logoutUrl": "http://192.168.31.80:8001/auth/realms/DHAKA/protocol/openid-connect/logout",
         "clientAssertionSigningAlg": "RS256",
         "syncMode": "IMPORT"
       }
@@ -50,7 +50,7 @@
       "config": {
         "userInfoUrl": "http://localhost:8001/auth/realms/BARISAL/protocol/openid-connect/userinfo",
         "validateSignature": "true",
-        "clientId": "next-client-2",
+        "clientId": "broker",
         "tokenUrl": "http://localhost:8001/auth/realms/BARISAL/protocol/openid-connect/token",
         "jwksUrl": "http://localhost:8001/auth/realms/BARISAL/protocol/openid-connect/certs",
         "issuer": "http://localhost:8001/auth/realms/BARISAL",
@@ -67,7 +67,7 @@
   "roles": {
 
     "client" : {
-      "next-client" : [
+      "dhaka-client" : [
         {
           "name": "student",
           "description": "Student privileges"
@@ -84,19 +84,9 @@
       ]
     }
   },
-  "scopeMappings": [
-    {
-      "client": "next-client",
-      "roles": [
-        "student",
-        "teacher",
-        "admin"
-      ]
-    }
-  ],
   "clients": [
     {
-      "clientId": "next-client",
+      "clientId": "dhaka-client",
       "rootUrl": "http://localhost:3000/",
       "adminUrl": "http://localhost:3000/",
       "surrogateAuthRequired": false,
@@ -163,7 +153,7 @@
     },
     
     {
-      "clientId": "next-client-2",
+      "clientId": "barisal-client",
       "rootUrl": "http://localhost:5000/",
       "adminUrl": "http://localhost:5000/",
       "surrogateAuthRequired": false,
@@ -344,15 +334,5 @@
         }
       ]
     }
-  ],
-  "clientScopeMappings": {
-    "account": [
-      {
-        "client": "next-client",
-        "roles": [
-          "view-profile"
-        ]
-      }
-    ]
-  }
+  ]
 }
