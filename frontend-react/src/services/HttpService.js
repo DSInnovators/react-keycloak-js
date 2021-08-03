@@ -12,6 +12,7 @@ const _axios = axios.create();
 
 _axios.interceptors.request.use((config) => {
   console.log('using interceptor: login',UserService.isLoggedIn());
+  console.log('JWT TOKEN', UserService.getToken());
   if (UserService.isLoggedIn()) {
     const cb = () => {
       /*config.headers.Authorization = `Bearer ${UserService.getToken()}`;

@@ -1,7 +1,7 @@
 {
   "realm": "BANBEIS-BROKER",
-  "auth-server-url": "http://localhost:8002/auth",
+  "auth-server-url": "http://localhost:8000/auth",
   "ssl-required": "external",
-  "resource": "next-client",
+  "resource": "dhaka-client",
   "public-client": true
 }

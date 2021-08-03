@@ -23,7 +23,9 @@ const initKeycloak = (onAuthenticatedCallback) => {
     })
 };
 
-const doLogin = _kc.login;
+const doLogin = () => {
+  return _kc.login({idpHint:'keycloak-dhaka'});
+};
 
 const doLogout = _kc.logout;
 
