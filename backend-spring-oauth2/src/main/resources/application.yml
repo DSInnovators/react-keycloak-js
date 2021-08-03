@@ -7,8 +7,8 @@ spring:
       client:
         registration:
           keycloak:
-            client-id: "api-3"
-            client-name: "api-3"
+            client-id: "dhaka-registration"
+            client-name: "Dhaka registration client"
             client-secret: "c04c2750-f471-48c2-90f4-ecf6c6247e36"
             provider: "keycloak"
         provider:

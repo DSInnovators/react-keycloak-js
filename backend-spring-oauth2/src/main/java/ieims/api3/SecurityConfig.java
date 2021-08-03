@@ -33,8 +33,13 @@ import java.util.List;
 @EnableWebSecurity
 class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Value("${spring.security.oauth2.client.provider.keycloak.jwk-set-uri}")
+    @Value("${spring.security.oauth2.client.provider.keycloak.banbeis-set-uri}")
     private String jwkSetUri;
+
+    @Bean
+    public JwtDecoder jwtDecoder() {
+        return NimbusJwtDecoder.withJwkSetUri(this.jwkSetUri).build();
+    }
 
     @Value("${spring.security.oauth2.client.registration.keycloak.client-id}")
     private String client;
@@ -67,10 +72,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
         return jwtConverter;
     }
 
-    @Bean
-    public JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withJwkSetUri(this.jwkSetUri).build();
-    }
+
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

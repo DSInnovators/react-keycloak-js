@@ -1,7 +1,7 @@
 {
-  "realm": "DHAK",
-  "auth-server-url": "http://localhost:8002/auth",
+  "realm": "BANBEIS-BROKER",
+  "auth-server-url": "http://localhost:8000/auth",
   "ssl-required": "external",
-  "resource": "next-client-2",
+  "resource": "student-client",
   "public-client": true
 }

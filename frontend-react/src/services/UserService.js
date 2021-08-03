@@ -91,6 +91,8 @@ const  tokenExpired =_kc.onTokenExpired = () => {
     console.log('response',response);
     if (response) {
       console.log('successfully get a new token', _kc.token);
+
+        fetchIdpToken();
     } /*else {
       throw new Error('Something went wrong ...');
     }*/

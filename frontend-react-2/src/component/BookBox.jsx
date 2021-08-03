@@ -81,20 +81,7 @@ const Welcome = () => {
       <Switch>
           <Route exact path="/">
               {/*<BookList/>*/}
-              List of books
-              <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={getStudentData}>
-                  GetStudentData
-              </button>
-
-              <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={getAdminData}>
-                  getAdminData
-              </button>
+              Hello
 
           </Route>
           <Route exact path="/books/new">

@@ -18,8 +18,8 @@ const Welcome = () => {
         console.log(JSON.stringify(jwt_decode(UserService.getToken())))
     }, []);
 
-    const getStudentData = async ()=>{
-        console.log('Cookie created name : user ');
+    const getUserData = async ()=>{
+       // console.log('Cookie created name : user ');
 
        // UserService.fetchIdpToken();
 
@@ -102,8 +102,8 @@ const Welcome = () => {
               <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={getStudentData}>
-                  GetStudentData
+                  onClick={getUserData}>
+                  GetUserData
               </button>
 
               <button

@@ -17,11 +17,12 @@ ENV KEYCLOAK_LOGLEVEL=DEBUG
 ENV DB_VENDOR h2
 
 
-#ENV KEYCLOAK_IMPORT /tmp/realm.json
+ENV KEYCLOAK_IMPORT /tmp/realm.json
 #ENV KEYCLOAK_MIGRATION_STRATEGY OVERWRITE_EXISTING
 
 
-CMD ["-Dkeycloak.import=/tmp/realm.json"]
+#CMD ["-Dkeycloak.import=/tmp/realm.json"]
+CMD ["-Dkeycloak.profile.feature.admin_fine_grained_authz=enabled"]
 
 
 EXPOSE 8080
