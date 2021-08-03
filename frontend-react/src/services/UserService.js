@@ -2,6 +2,9 @@ import Keycloak from "keycloak-js";
 
 const _kc = new Keycloak('/keycloak.json');
 
+
+
+
 /**
  * Initializes Keycloak instance and calls the provided callback function if successfully authenticated.
  *
@@ -25,7 +28,6 @@ const initKeycloak = (onAuthenticatedCallback) => {
 
 const doLogin = () => {
   return _kc.login({idpHint:'keycloak-dhaka'});
-};
 
 const doLogout = _kc.logout;
 
