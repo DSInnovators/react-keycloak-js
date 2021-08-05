@@ -96,7 +96,7 @@
       },
       {
         "id": "526f601b-a0b9-4e79-979e-c41dfc4b0563",
-        "name": "default-roles-banbeis-1",
+        "name": "default-roles-dhaka",
         "description": "${role_default-roles}",
         "composite": true,
         "composites": {
@@ -444,7 +444,7 @@
   "groups": [],
   "defaultRole": {
     "id": "526f601b-a0b9-4e79-979e-c41dfc4b0563",
-    "name": "default-roles-banbeis-1",
+    "name": "default-roles-dhaka",
     "description": "${role_default-roles}",
     "composite": true,
     "clientRole": false,
@@ -553,13 +553,13 @@
       "clientId": "account-console",
       "name": "${client_account-console}",
       "rootUrl": "${authBaseUrl}",
-      "baseUrl": "/realms/BANBEIS-1/account/",
+      "baseUrl": "/realms/DHAKA/account/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/realms/BANBEIS-1/account/*"
+        "/realms/DHAKA/account/*"
       ],
       "webOrigins": [],
       "notBefore": 0,

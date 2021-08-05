@@ -24,7 +24,7 @@ const Welcome = () => {
         //const  clientId = 'broker';
         console.log('Clientid',clientId);
 
-       // const nonce = "21209ef6-f04c-47a9-ae35-c84d989ccd44";
+        //const nonce = "21209ef6-f04c-47a9-ae35-c84d989ccd44";
         const nonce = jwt_decode(UserService.getToken()).nonce;
         console.log('nonce',nonce);
 
