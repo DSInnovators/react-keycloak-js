@@ -20,11 +20,11 @@ const Welcome = () => {
 
 
     const account_linking = () =>{
-         const  clientId = jwt_decode(UserService.getToken()).azp;
-        //const  clientId = 'dhaka-client';
+        const  clientId = jwt_decode(UserService.getToken()).azp;
+        //const  clientId = 'broker';
         console.log('Clientid',clientId);
 
-        //const nonce = uuidv4();
+       // const nonce = "21209ef6-f04c-47a9-ae35-c84d989ccd44";
         const nonce = jwt_decode(UserService.getToken()).nonce;
         console.log('nonce',nonce);
 
@@ -47,42 +47,21 @@ const Welcome = () => {
         let encoded = base64_encode(messageDigest);
         console.log('Base64 encoded',encoded);
 
-        //let redirect_uri = 'http://localhost:3000';
-        let redirect_uri = 'http%3A%2F%2Flocalhost%3A3000';
+        let redirect_uri = 'http://192.168.31.80:3000';
+       // let redirect_uri = 'http%3A%2F%2Flocalhost%3A3000';
         console.log('redirect_uri',redirect_uri);
 
-        const query_param = 'client_id=' +clientId +'&redirect_uri='+redirect_uri + '&nonce=' + nonce +'&hash='+messageDigest;
+        const query_param = 'client_id=' +clientId +'&redirect_uri='+redirect_uri + '&nonce=' + nonce +'&hash='+encoded;
 
         //http://localhost:8000/auth/realms/BANBEIS-BROKER/broker/keycloak-dhaka/link?client_id=dhaka-client&redirect_uri=http%3A%2F%2F192.168.31.80%3A3000&nonce=84143699-9f3f-4661-ac3e-e029d450f2fa&hash=b103d71e9d5d121af5025a290f3e08c3152adaafc964b03afe6711ad9ce23fd2
         // /{auth-server-root}/auth/realms/{realm}/broker/{provider}/link?client_id={id}&redirect_uri={uri}&nonce={nonce}&hash={hash}
-        const url = 'http://localhost:8000/auth/realms/BANBEIS-BROKER/broker/keycloak-dhaka/link' + "?" + query_param ;
+        const url = 'http://192.168.31.80:8000/auth/realms/BANBEIS-BROKER/broker/keycloak-dhaka/link' + "?" + query_param ;
         console.log('url');
         console.log(url);
 
-        _axios.get(url,{
-           // crossorigin: true,
-            headers: {
-                'Authorization': 'Bearer ' + UserService.getToken(),
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'text/plain',
+        console.log(JSON.stringify(jwt_decode(UserService.getToken())))
 
-            }}
-        ).then(res => {
-            console.log(res);
-
-            if(res.status == 200) {
-                const access_token = res.data.access_token;
-                console.log(res.data.access_token);
-                Cookies.set('access_token', access_token, { expires: 7, path: '' })
-            }
-
-        }).catch(error => {
-                //alert('You are not authorize to view the content')
-                console.log("Error occured " + error)
-            }
-        )
-
-        //window.location.replace(url)
+        window.location.replace(url)
     }
 
 

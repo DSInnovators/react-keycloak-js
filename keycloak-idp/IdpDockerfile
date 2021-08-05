@@ -5,7 +5,7 @@ COPY realm-dhaka.json /tmp/realm-dhaka.json
 COPY realm-barisal.json /tmp/realm-barisal.json
 #COPY realm-master.json /tmp/realm-master.json
 
-FROM quay.io/keycloak/keycloak:14.0.0
+FROM quay.io/keycloak/keycloak:15.0.0
 
 
 COPY --from=build /tmp/realm-dhaka.json /tmp/realm-dhaka.json

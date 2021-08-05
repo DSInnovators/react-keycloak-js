@@ -29,7 +29,7 @@ const initKeycloak = (onAuthenticatedCallback) => {
 };
 
 const doLogin = () => {
-  return _kc.login({idpHint:_idp_hint});
+  return _kc.login(/*{idpHint:_idp_hint}*/);
 }
 
 const doLogout = _kc.logout;
