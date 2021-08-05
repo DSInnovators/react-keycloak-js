@@ -10,18 +10,18 @@ import jwt_decode from "jwt-decode";
 import { sha256, sha224 } from 'js-sha256';
 import {decode as base64_decode, encode as base64_encode} from 'base-64';
 import { v4 as uuidv4 } from 'uuid';
+import Cookies from "js-cookie";
 
+const _axios = axios.create();
 const LIST_STUDENTS = 'http://localhost:7070/user/hello';
 const LIST_ADMINS = 'http://localhost:7070/admin/hello';
 
 const Welcome = () => {
 
 
-    useEffect(() => {
-
-
-       // const  clientId = jwt_decode(UserService.getToken()).azp;
-        const  clientId = 'dhaka-client';
+    const account_linking = () =>{
+         const  clientId = jwt_decode(UserService.getToken()).azp;
+        //const  clientId = 'dhaka-client';
         console.log('Clientid',clientId);
 
         //const nonce = uuidv4();
@@ -37,7 +37,7 @@ const Welcome = () => {
 
         const input = nonce + session_state + clientId + provider;
         console.log('input',input);
-       // console.log(JSON.stringify(jwt_decode(UserService.getToken())))
+        // console.log(JSON.stringify(jwt_decode(UserService.getToken())))
 
 
         const messageDigest = sha256(input);
@@ -47,8 +47,8 @@ const Welcome = () => {
         let encoded = base64_encode(messageDigest);
         console.log('Base64 encoded',encoded);
 
-        //let redirect_uri = 'http://192.168.31.80:3000';
-        let redirect_uri = 'http%3A%2F%2F192.168.31.80%3A3000';
+        //let redirect_uri = 'http://localhost:3000';
+        let redirect_uri = 'http%3A%2F%2Flocalhost%3A3000';
         console.log('redirect_uri',redirect_uri);
 
         const query_param = 'client_id=' +clientId +'&redirect_uri='+redirect_uri + '&nonce=' + nonce +'&hash='+messageDigest;
@@ -56,9 +56,40 @@ const Welcome = () => {
         //http://localhost:8000/auth/realms/BANBEIS-BROKER/broker/keycloak-dhaka/link?client_id=dhaka-client&redirect_uri=http%3A%2F%2F192.168.31.80%3A3000&nonce=84143699-9f3f-4661-ac3e-e029d450f2fa&hash=b103d71e9d5d121af5025a290f3e08c3152adaafc964b03afe6711ad9ce23fd2
         // /{auth-server-root}/auth/realms/{realm}/broker/{provider}/link?client_id={id}&redirect_uri={uri}&nonce={nonce}&hash={hash}
         const url = 'http://localhost:8000/auth/realms/BANBEIS-BROKER/broker/keycloak-dhaka/link' + "?" + query_param ;
-        console.log('url',url);
+        console.log('url');
+        console.log(url);
 
-        window.location.replace(url)
+        _axios.get(url,{
+           // crossorigin: true,
+            headers: {
+                'Authorization': 'Bearer ' + UserService.getToken(),
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'text/plain',
+
+            }}
+        ).then(res => {
+            console.log(res);
+
+            if(res.status == 200) {
+                const access_token = res.data.access_token;
+                console.log(res.data.access_token);
+                Cookies.set('access_token', access_token, { expires: 7, path: '' })
+            }
+
+        }).catch(error => {
+                //alert('You are not authorize to view the content')
+                console.log("Error occured " + error)
+            }
+        )
+
+        //window.location.replace(url)
+    }
+
+
+    useEffect(() => {
+
+
+
 
 
     }, []);
@@ -147,7 +178,7 @@ const Welcome = () => {
               <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={getUserData}>
+                  onClick={account_linking}>
                   GetUserData
               </button>
 
