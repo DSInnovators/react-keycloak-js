@@ -22,7 +22,8 @@ ENV KEYCLOAK_IMPORT /tmp/realm.json
 
 
 #CMD ["-Dkeycloak.import=/tmp/realm.json"]
-CMD ["-Dkeycloak.profile.feature.admin_fine_grained_authz=enabled"]
+CMD ["-Dkeycloak.profile.feature.admin_fine_grained_authz=enabled","-Dkeycloak.profile.feature.token_exchange=enabled"]
+
 
 
 EXPOSE 8080
